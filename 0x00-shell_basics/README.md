@@ -5,3 +5,4 @@ ls -l command displays all file list in a long format
 ls -la this commandd list all files in long format including the files that start with a period character which are normally hidden
 mkdir this command create directory.
 mv command moves files from one location to another it can also change files name as it moves.
+ls -na this comman list all files in a long format with user and id display numerically.
