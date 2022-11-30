@@ -6,4 +6,5 @@ ls -la this commandd list all files in long format including the files that star
 mkdir this command create directory.
 mv command moves files from one location to another it can also change files name as it moves.
 ls -na this comman list all files in a long format with user and id display numerically.
-rm -r this command delete or rmove directories
+rm -r this command delete or rmove directories.
+cd - command take you back to your previous directory.
