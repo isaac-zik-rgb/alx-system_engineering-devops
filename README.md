@@ -1,0 +1,1 @@
+this reposotory is for my shell basics project in alx

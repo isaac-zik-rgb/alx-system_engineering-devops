@@ -1,0 +1,1 @@
+pwd commannd print the current working directory. it shows us our location in the tree
