@@ -1,1 +1,2 @@
-pwd commannd print the current working directory. it shows us our location in the tree
+pwd commannd print the current working directory. it shows us our location in the tree.
+ls command list every files of our working directory execept the once that start with a period which will need other argument to view them
