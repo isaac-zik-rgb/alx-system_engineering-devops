@@ -1,2 +1,2 @@
 #!/bin/bash
-mkdir {0x003-git/welcome/,wecome/to/,welcome/to/school}
+mkdir {0x00-shell_basics/welcome/,wecome/to/,welcome/to/school}
