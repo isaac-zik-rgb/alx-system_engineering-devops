@@ -8,3 +8,4 @@ mv command moves files from one location to another it can also change files nam
 ls -na this comman list all files in a long format with user and id display numerically.
 rm -r this command delete or rmove directories.
 cd - command take you back to your previous directory.
+ls -a . /.. /boot this command list all files and directories even the onces that are usually hidden in the current directory, parent working directory and in the boot in an order
