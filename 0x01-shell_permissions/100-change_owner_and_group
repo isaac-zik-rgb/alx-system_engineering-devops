@@ -1,2 +1,2 @@
 #!/bin/bash
-chown -hR vicent:staff ./
+chown -R vicent:staff /0x01-shell_permissions
