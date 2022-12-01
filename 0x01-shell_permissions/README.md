@@ -1,0 +1,1 @@
+su command in file permission changes the users owner to another
