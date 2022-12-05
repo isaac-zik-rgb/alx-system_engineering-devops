@@ -1,0 +1,2 @@
+#!/bin/bash
+less iacta | head -n 4
