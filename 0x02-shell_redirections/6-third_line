@@ -1,2 +1,3 @@
 #!/bin/bash
-cat -e  'iacta\n\n\n'
+head -3 iacta | tai -1
+
