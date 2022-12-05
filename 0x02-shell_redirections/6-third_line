@@ -1,2 +1,2 @@
 #!/bin/bash
-less  iacta | head -n 3
+cat -e  'iacta\n\n\n'
