@@ -1,0 +1,1 @@
+alias is a command to assign a value to a variable
