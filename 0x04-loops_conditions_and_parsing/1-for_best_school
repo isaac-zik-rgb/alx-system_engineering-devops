@@ -1,8 +1,8 @@
 #!/usr/bin/env/bash
 #The for loop start at 0 and ends once it reaches 10
 #this print Best Scholl ten times
-i="Best School"
-for i in {0..9}
-do
-    echo "$i"
+name="Best School"
+for i in {0..9}; do
+    echo "$name"
 done
+
