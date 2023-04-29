@@ -1,8 +1,10 @@
 #!/usr/bin/bash
-name="Best School"
-i=0
-for i in {0..9}; do
-    echo "$name"
 
+count=0
+
+while (( [$count -lt 10] ))
+do
+
+    echo "Best School"
+    $count++
 done
-export i
