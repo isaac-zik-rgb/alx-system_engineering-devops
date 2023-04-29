@@ -5,6 +5,7 @@ do
     if [ "$count" -eq 9 ]
     then
 	echo "Hi"
+	break
     fi
     echo "Best School"
     ((count++))
