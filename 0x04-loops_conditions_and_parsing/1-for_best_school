@@ -1,7 +1,8 @@
 #!/usr/bin/env/bash
 #The for loop start at 0 and ends once it reaches 10
 name="Best School"
+i=0
 for i in {0..9}; do
     echo "$name"
 done
-
+export i
