@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
 #match a pattern
-hb[t]{1,4}n
+puts ARGV[0].scan(/hb[t]*n/).join
