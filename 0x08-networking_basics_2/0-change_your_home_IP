@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#reconfiguring localhost and facebook with different ip address
-
+#mapping facebook.com and localhost to another ip address
 echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts
-echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+echo "nameserver 8.8.8.8" | sudo tee /resolv.conf
