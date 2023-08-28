@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Configure our ssh clinet to Auntenticate without a password
+Host *
+IdentityFile ~/.ssh/school
+PasswordAunthentication no
+
