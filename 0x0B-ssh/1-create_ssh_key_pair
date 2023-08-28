@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# A script that generate an RSA key with a larger bit of 4096, private key name = school passphrase = betty
+ssh-keygen -t rsa -b 4096 -f school -N betty
