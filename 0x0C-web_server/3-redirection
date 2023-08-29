@@ -15,7 +15,19 @@ sudo ufw allow 'Nginx HTTP'
 # Make the necessary directories
 mkdir -p /var/www/html/
 sudo chmod -R 755 /var/www
-echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Create a custom HTML file with the desired response
+CUSTOM_RESPONSE="
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.4.6 (Ubuntu)
+Date: $(date -R)
+Content-Type: text/html
+Content-Length: 193
+Connection: keep-alive
+Location: https://www.youtube.com/watch?v=QH2-TGUlwu4
+"
+
+echo "$CUSTOM_RESPONSE" | sudo tee /var/www/html/redirect_response.txt > /dev/null
 
 # NGINX configuration
 NGINX_CONFIG="
@@ -33,7 +45,7 @@ server {
     }
 
     location ~ ^/redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        rewrite ^ /redirect_response.txt last;
     }
 }
 "
@@ -44,4 +56,4 @@ echo "$NGINX_CONFIG" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
 # Restart NGINX
 sudo service nginx restart
 
-echo "NGINX has been installed and configured. You can test it with 'curl localhost'"
+echo "NGINX has been installed and configured successfully. You can test it using 'curl localhost'"
