@@ -1,31 +1,47 @@
 #!/usr/bin/env bash
-# Installs, configures, and starts the server
-apt-get update
-apt-get -y install nginx
+
+# Update packages
+sudo apt update
+
+# Install nginx
+sudo apt-get -y install nginx
+
+# Start up nginx
+sudo service nginx start
+
+# Allow firewall
 sudo ufw allow 'Nginx HTTP'
+
+# Make the necessary directories
 mkdir -p /var/www/html/
 sudo chmod -R 755 /var/www
-echo 'Hello World!' > /var/www/html/index.html
-SERVER_CONFIG=\
-             "server {
-             listen 80 default_server;
-             listen [::]:80 default_server;
-             root /var/www/html;
-             index index.html index.htm index.nginx-debian.html;
-             server_name _;
-             location / {
-                      try_files \$uri \$uri/ =404;
-                      }
-                      if (\$request_filename ~ redirect_me){
-                         rewrite ^ https://sketchfab.com/bluepeno/models permanent;
-                         }
-}"
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-bash -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+# NGINX configuration
+NGINX_CONFIG="
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-if [ "$(pgrep -c nginx)" -le 0 ]; then
-    service nginx start
-else
-    service nginx restart
-fi
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
 
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location ~ ^/redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}
+"
+
+# Write NGINX configuration to the default site
+echo "$NGINX_CONFIG" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
+
+# Restart NGINX
+sudo service nginx restart
+
+echo "NGINX has been installed and configured. You can test it with 'curl localhost'"
