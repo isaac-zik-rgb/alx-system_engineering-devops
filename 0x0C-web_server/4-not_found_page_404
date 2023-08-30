@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Installing Nginx on a new ubuntu machine and redirectly a page with 301 redirection
+
+# Install nginx on a new ubuntu page and design a custom 404 page
 
 # Install Nginx
 sudo apt -y install nginx
