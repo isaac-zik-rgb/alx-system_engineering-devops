@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-# Installing Nginx on our web-01 server
-# Update packages list
-sudo apt update
+# Installing Nginx on a new ubuntu machine and redirectly a page with 301 redirection
+
 # Install Nginx
 sudo apt -y install nginx
 ufw allow 'Nginx HTTP'
-sudo chown -R $USER:$USER /var/www/html
+sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
 # creating the text for my page
@@ -31,4 +30,5 @@ echo "$REDIRECT_CONFIG" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
 
 # Restart Nginx
 sudo service nginx restart
+
 echo "Congratulation Nginx has been installed and configured successfully. You can test the redirection with 'curl localhost/redirect_me'"
