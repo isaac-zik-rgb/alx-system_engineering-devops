@@ -8,7 +8,6 @@ sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
 # creating the text for my page
-echo "I love programming" > /var/www/html/redirect_me.html
 echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
 
 # Create a new Nginx configuration snippet for redirection
@@ -18,20 +17,16 @@ server {
     listen [::]:80;
 
     root /var/www/html;
-    index redirect_me.html index.html index.nginx-debian.html;
+    index index.html index.html index.nginx-debian.html;
 
     server_name localhost;
 
-    location /redirect_me {
-    rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-}
         error_page 404 /custom_404.html;
     location = /custom_404.html {
         internal;
     }
 }
 "
-echo "$REDIRECT_CONFIG" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
 
 # Restart Nginx
 sudo service nginx restart
