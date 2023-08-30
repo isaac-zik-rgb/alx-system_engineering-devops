@@ -1,59 +1,34 @@
 #!/usr/bin/env bash
-
-# Update packages
+# Installing Nginx on our web-01 server
+# Update packages list
 sudo apt update
-
-# Install nginx
-sudo apt-get -y install nginx
-
-# Start up nginx
-sudo service nginx start
-
-# Allow firewall
-sudo ufw allow 'Nginx HTTP'
-
-# Make the necessary directories
-mkdir -p /var/www/html/
+# Install Nginx
+sudo apt -y install nginx
+ufw allow 'Nginx HTTP'
+sudo chown -R $USER:$USER /var/www/html
 sudo chmod -R 755 /var/www
 
-# Create a custom HTML file with the desired response
-CUSTOM_RESPONSE="
-HTTP/1.1 301 Moved Permanently
-Server: nginx/1.4.6 (Ubuntu)
-Date: $(date -R)
-Content-Type: text/html
-Content-Length: 193
-Connection: keep-alive
-Location: https://www.youtube.com/watch?v=QH2-TGUlwu4
-"
+# creating the text for my page
+echo "I love programming" > /var/www/html/redirect_me.html
 
-echo "$CUSTOM_RESPONSE" | sudo tee /var/www/html/redirect_response.txt > /dev/null
-
-# NGINX configuration
-NGINX_CONFIG="
+# Create a new Nginx configuration snippet for redirection
+REDIRECT_CONFIG="
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    listen 80;
+    listen [::]:80;
 
     root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
+    index redirect_me.html index.html index.nginx-debian.html;
 
-    server_name _;
+    server_name localhost;
 
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location ~ ^/redirect_me {
-        rewrite ^ /redirect_response.txt last;
-    }
+    location /redirect_me {
+    rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+}
 }
 "
+echo "$REDIRECT_CONFIG" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
 
-# Write NGINX configuration to the default site
-echo "$NGINX_CONFIG" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
-
-# Restart NGINX
+# Restart Nginx
 sudo service nginx restart
-
-echo "NGINX has been installed and configured successfully. You can test it using 'curl localhost'"
+echo "Congratulation Nginx has been installed and configured successfully. You can test the redirection with 'curl localhost/redirect_me'"
