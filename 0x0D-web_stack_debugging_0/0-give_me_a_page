@@ -8,6 +8,6 @@ FROM httpd:2.4
 echo "Hello Holberton" > index.html
 COPY "index.html" /usr/local/apache2/htdocs/
 docker build -t my-apache-image .
-docker run -d -p 80:80 --name my-apache-container my-apache-image
+docker run -p 8080:80 -d my-apache-image
 
 
