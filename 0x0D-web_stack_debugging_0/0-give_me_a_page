@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Fix a bug in the apache web server and rturn a page
+
+# Use an official Apache image as the base image
+FROM httpd:2.4
+
+# Replace the default index.html with your custom content
+echo "Hello Holberton" > index.html
+COPY "index.html" /usr/local/apache2/htdocs/
+docker build -t my-apache-image .
+docker run -d -p 80:80 --name my-apache-container my-apache-image
+
+
