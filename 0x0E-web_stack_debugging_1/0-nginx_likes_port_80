@@ -1,22 +1,6 @@
 #!/usr/bin/env bash
 # install nginx and return a page when curl on port 80
-sudo apt-get update
-sudo apt -y install nginx
+apt-get update
+apt -y install nginx
 sudo ufw allow 'Nginx HTTP'
 service nginx start
-echo "
-http {
-    server {
-        listen 80;
-        server_name *;
-        root /var/www/your-site;
-        index index.html;
-
-        location / {
-        try_files \$uri \$uri/ =404;
-}
-
-}
-"| sudo tee /etc/nginx/sites-available/default > /dev/null
-#sudo ln -s /etc/nginx/sites-available/your-site /etc/nginx/sites-enabled
-sudo service nginx restart
