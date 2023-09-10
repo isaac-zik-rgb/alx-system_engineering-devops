@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Fixing nginx to stop running
+service nginx stop
