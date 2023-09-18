@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# a script that runs the user whoami command passed as a script
+sudo -u "$1" whoami
