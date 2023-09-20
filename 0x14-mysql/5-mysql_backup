@@ -4,10 +4,10 @@ if [ $# -ne 1 ];then
     echo "USAGE: $0 <MYSQL_root_password>"
     exit 1
 fi
-BACKUP_DIR="HOME"
+
 TIMESTAMP=$(date +"%d-%m-%Y")
 
 MYSQL_ROOT_PASSWORD="$1"
-mysqldump -u root -p"$MYSQL_ROOT_PASSWORD" --all-database > "$BACKUP_DIR/backup.sql"
-tar -czf "$BACKUP_DIR/$TIMESTAMP.tar.gz" -C "$BACKUP_DIR" backup.sql
+sudo mysqldump -u root -p"$MYSQL_ROOT_PASSWORD" --all-databases | sudo tee backup.sql
+tar -czf "$TIMESTAMP.tar.gz"  backup.sql
 echo "Backup archive created: $BACKUP_DIR/$TIMESTAMP.tar.gz"
