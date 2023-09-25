@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" A python script that using REST API for a given
-employee ID return information abut his/her TODO list """
+""" A python script that print a user todo list"""
 import requests
 import sys
 
