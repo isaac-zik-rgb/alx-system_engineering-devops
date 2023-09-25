@@ -11,7 +11,6 @@ if __name__ == "__main__":
     todos = requests.get(url + "todos", params={"userId": user_id}).json()
     username = user.get("username")
     users_id = user.get("id")
-    print(username)
     with open("{}.json".format(users_id), "w") as jsonfile:
         json.dump({users_id: [{
             "task": t.get("title"),
