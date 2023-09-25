@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" A python script that print a user todo list"""
+"""Returns to-do list information for a given employee ID."""
 import requests
 import sys
 
