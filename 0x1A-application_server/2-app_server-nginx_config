@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # configures ngix to server our page in it's public ip and local ip
-NGINX_CONF="
+
 server {
        listen 80;
        server_name codezenith.tech 127.0.0.1;
@@ -11,5 +11,3 @@ server {
        }
 
 }
-"
-echo "$NGINX_CONF" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
