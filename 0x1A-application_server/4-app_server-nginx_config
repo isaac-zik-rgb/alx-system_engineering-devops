@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# handle incomming traffics and route it to a specific backend server
+server "{
+       listen 80;
+       server_name 100.26.20.18 127.0.0.1;
+
+       location /api/ {
+       include proxy_params;
+       proxy_pass http://0.0.0.0:5002;
+       }
+
+}"
