@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#configure an nginx proxy to server handle traffic and route to there port
+server "{
+    listen 80;
+    server_name 100.26.20.18 localhost;
+
+    location / {
+        include proxy_params;
+
+        proxy_pass http://0.0.0.0:5001;
+    }
+
+    location /5000 {
+        include proxy_params;
+
+        proxy_pass http://0.0.0.0:5000;
+    }
+
+    }"
+
