@@ -4,7 +4,6 @@
 APP_DIR="/home/AirBnB_clone_v4/web_dynamic/static/"
 
 # Define your virtual environment's bin directory
-VENV_BIN="/home/AirBnB_clone_v2/flask_env"
 
 # Define the Gunicorn systemd service file
 SERVICE_FILE="/etc/systemd/system/gunicorn.service"
