@@ -1,0 +1,42 @@
+#!/user/bin/env bash
+
+# Define your application directory
+APP_DIR="/home/AirBnB_clone_v4/web_dynamic/static/"
+
+# Define your virtual environment's bin directory
+VENV_BIN="/home/AirBnB_clone_v2/flask_env"
+
+# Define the Gunicorn systemd service file
+SERVICE_FILE="/etc/systemd/system/gunicorn.service"
+
+# Create the Gunicorn systemd service file
+cat <<EOF > $SERVICE_FILE
+[Unit]
+Description=Gunicorn instance to serve web_dynamic/2-hbnb.py
+After=network.target
+
+[Service]
+User=ubuntu  # Change this to the appropriate user
+Group=www-data  # Change this to the appropriate group
+WorkingDirectory=$APP_DIR
+ExecStart=/home/ubuntu/.local/bin/gunicorn -w 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app
+Restart=always
+Environment=PATH=/home/ubuntu/.local/bin/gunicorn
+StandardOutput=file:/tmp/airbnb-access.log
+StandardError=file:/tmp/airbnb-error.log
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Reload systemd to read the new service configuration
+sudo systemctl daemon-reload
+
+# Start the Gunicorn systemd service
+sudo systemctl start gunicorn
+
+# Enable the service to start on boot
+sudo systemctl enable gunicorn
+
+# Check the status of the service
+sudo systemctl status gunicorn
