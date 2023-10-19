@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# configure nginx and proxy pass it to a gunicorn instance
+server "{
+       listen 80;
+              server_name 100.26.20.18 127.0.0.1;
+
+       location /airbnb-onepage/ {
+              include proxy_params;
+                     proxy_pass http://0.0.0.0:5000;
+                           }
+
+      location /airbnb-dynamic/number_odd_or_even/ {
+            include proxy_params;
+                  proxy_pass http://0.0.0.0:5001;
+                        }
+                              location /api/ {
+                                    include proxy_params;
+                                          proxy_pass http://0.0.0.0:5002;
+                                                }
+
+    location / {
+                proxy_pass http://127.0.0.1:5003;
+                                }
+
+    location /static/ {
+                alias  AirBnB_clone_v4/web_dynamic/static/;
+                                }
+
+    location /web_dynamic/static/scripts/2-hbnb.js {
+                alias AirBnB_clone_v4/web_dynamic/static/scripts/2-hbnb.js;
+                                }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+                expires 1y;
+                                    add_header Cache-Control "public, max-age=31536000";
+                                                            }
+
+    location /web_dynamic/static/ {
+                sendfile on;
+                                }
+
+}
+"
