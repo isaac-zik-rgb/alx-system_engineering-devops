@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Define the path to the Gunicorn PID file
+PID_FILE="/tmp/gunginx5.pid"
+
+# Check if the PID file exists
+if [ ! -f "$PID_FILE" ]; then
+  echo "Gunicorn PID file not found. Make sure to set the correct path to your Gunicorn PID file."
+    exit 1
+    fi
+
+# Get the process ID of the Gunicorn master process
+GUNICORN_PID=$(cat "$PID_FILE")
+
+# Send the HUP signal to the Gunicorn master process to trigger a graceful reload
+kill -HUP "$GUNICORN_PID"
+
+echo "Gunicorn is reloading gracefully using PID file: $PID_FILE"

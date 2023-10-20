@@ -1,18 +1,31 @@
 #!/usr/bin/env bash
 #configure an nginx proxy to server handle traffic and route to there port
-server "{
-    listen 80;
-    server_name 100.26.20.18 127.0.0.1;
+server {
+    # Listen on port 80
+    listen      80 default_server;
+    listen      [::]:80 default_server ipv6only=on;
 
-    location /airbnb-onepage/ {
+    # Use server IP as domain name
+    server_name 100.26.20.18;
+
+    # Customize HTTP response header
+    add_header  X-Served-By codezenith.tech;
+
+        # Serve /airbnb-onepage/ route on AirBnB_clone_v2
+
+    location = /airbnb-onepage/ {
         include proxy_params;
         proxy_pass http://0.0.0.0:5000;
     }
 
-    location /airbnb-dynamic/number_odd_or_even/ {
+    location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
         include proxy_params;
-        proxy_pass http://0.0.0.0:5001;
+        proxy_pass http://0.0.0.0:5001/number_odd_or_even/$1;
     }
-
+    # 404 error pge
+    error_page 404 /404.html;
+    location /404 {
+        root /var/www/html;
+        internal;
+    }
 }
-"
