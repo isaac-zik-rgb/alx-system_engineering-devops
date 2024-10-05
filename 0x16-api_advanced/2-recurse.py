@@ -9,7 +9,7 @@ def recurse(subreddit, hot_list=[], after=None):
 containing the titles of all hot articles"""
     url = f"https://www.reddit.com/r/{subreddit}/hot.json?after={after}"
     headers = {'User-Agent': 'PythonScript/3.0'}
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=60)
     try:
         response.raise_for_status()
         data = response.json()
