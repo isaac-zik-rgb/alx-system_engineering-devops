@@ -7,8 +7,8 @@ import sys
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
     user_id = sys.argv[1]
-    user_response = requests.get(url + "users/{}".format(user_id))
-    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+    user_response = requests.get(url + "users/{}".format(user_id), timeout=60)
+    todos = requests.get(url + "todos", params={"userId": user_id}, timeout=60).json()
     user = user_response.json()
     user_id = user.get("id")
     username = user.get("username")

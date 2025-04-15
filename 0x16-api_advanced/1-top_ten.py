@@ -8,7 +8,7 @@ def top_ten(subreddit):
     """a function that queries the Reddit API and prints the titles"""
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     header = {'User-Agent': 'PythonScript/3.0'}
-    response = requests.get(url, header)
+    response = requests.get(url, header, timeout=60)
     data = response.json()
     if response.status_code == 200:
         posts = data.get('data', {}).get('children', [])
