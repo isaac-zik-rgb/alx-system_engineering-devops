@@ -9,7 +9,7 @@ def count_words(subreddit, word_list, found_list=[], after=None):
     '''
     user_agent = {'User-agent': 'test45'}
     url = f"http://www.reddit.com/r/{subreddit}/hot.json?after={after}"
-    posts = requests.get(url, headers=headers)
+    posts = requests.get(url, headers=headers, timeout=60)
     if after is None:
         word_list = [word.lower() for word in word_list]
 
